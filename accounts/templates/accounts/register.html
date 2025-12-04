@@ -6,54 +6,24 @@
 <body>
     <h1>Регистрация</h1>
 
-<form>
-    <div>
-        <label>Никнейм:</label>
-        <input type="text" placeholder="Только буквы, цифры и @/./+/-/_">
-    </div>
+    <form method="POST">
+        {% csrf_token %}
 
-    <div>
-        <label>Email:</label>
-        <input type="email" placeholder="Ваш email">
-    </div>
+        {% for field in form %}
+            <div>
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: red;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
 
-    <div>
-        <label>Телеграмм тег:</label>
-        <input type="text" placeholder="@Ваш_тег">
-    </div>
+        <button type="submit">Зарегистрироваться</button>
 
-    <div>
-        <label>Ваши навыки:</label>
-        <textarea placeholder="Ваши навыки"></textarea>
-    </div>
-
-    <div>
-        <label>Нужные вам навыки:</label>
-        <textarea placeholder="Какие навыки вам интересны"></textarea>
-    </div>
-
-    <div>
-        <label>О себе:</label>
-        <textarea placeholder="Расскажите о себе"></textarea>
-    </div>
-
-    <div>
-        <label>Пароль:</label>
-        <input type="password">
-        <small>Минимум 8 символов, не только цифры</small>
-    </div>
-
-    <div>
-        <label>Подтверждение пароля:</label>
-        <input type="password" placeholder="Повторите пароль">
-    </div>
-
-    <button type="submit">Зарегистрироваться</button>
-
-    <div>
-        <span>Уже есть аккаунт?</span>
-        <a href="{% url 'login' %}">Войти</a>
-    </div>
-</form>
+        <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+    </form>
 </body>
 </html>

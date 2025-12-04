@@ -7,4 +7,4 @@ menu = [
 ]
 
 def home(request):
-    return render(request, 'Home/home.html', {'menu': menu})
+    return render(request, 'home/home.html', {'menu': menu})
