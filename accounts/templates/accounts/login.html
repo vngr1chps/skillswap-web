@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Вход</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">Неверный логин или пароль</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label for="id_username">Логин:</label>
+            <input type="text" name="username" id="id_username" value="testuser123">
+        </p>
+
+        <p>
+            <label for="id_password">Пароль:</label>
+            <input type="password" name="password" id="id_password" value="StrongPass123!">
+        </p>
+
+        <button type="submit">Войти</button>
+    </form>
+    <p>Ещё нет аккаунта?<a href="{% url 'register' %}">Регистрация</a></p>
+</body>
+</html>
