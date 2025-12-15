@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input, textarea { width: 300px; padding: 5px; margin-bottom: 10px; }
+        textarea { height: 100px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Редактировать профиль</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <p><strong>Имя пользователя:</strong><br>
+        <input type="text" name="username" value="{{ user.username }}"></p>
+        
+        <p><strong>Email:</strong><br>
+        <input type="email" name="email" value="{{ user.email }}"></p>
+        
+        <p><strong>Telegram:</strong><br>
+        <input type="text" name="telegram" value="{{ user.telegram }}"></p>
+        
+        <p><strong>Мои навыки:</strong><br>
+        <input type="text" name="skill_have" value="{{ user.skill_have }}"></p>
+        
+        <p><strong>Ищу навыки:</strong><br>
+        <input type="text" name="skill_need" value="{{ user.skill_need }}"></p>
+        
+        <p><strong>О себе:</strong><br>
+        <textarea name="bio">{{ user.bio }}</textarea></p>
+        
+        <button type="submit">Сохранить</button>
+        <button type="button" onclick="window.location.href='{% url 'view' %}'">
+            Отмена
+        </button>
+    </form>
+</body>
+</html>
