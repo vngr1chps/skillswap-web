@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>SkillSwap — Главная</title>
+    <title>SkillSwap — Лайки</title>
 </head>
 <body>
 
@@ -15,10 +15,9 @@
     border-bottom: 1px solid #ccc;
 ">
 
-    <!-- Левая часть -->
     <nav>
-        <a href="{% url 'likes' %}" style="margin-right: 16px;">
-            Лайки
+        <a href="{% url 'home' %}" style="margin-right: 16px;">
+            Лента
         </a>
 
         <a href="{% url 'matches' %}">
@@ -26,12 +25,8 @@
         </a>
     </nav>
 
-    <!-- Правая часть -->
     <div>
-        <!-- Заглушка, реализуешь позже -->
-        <a href="#" title="Профиль">
-            Профиль
-        </a>
+        <a href="#">Профиль</a>
     </div>
 
 </header>
@@ -39,10 +34,10 @@
 <!-- ===== Основной контент ===== -->
 <main style="padding: 24px;">
 
-    <h1>Лента анкет</h1>
+    <h1>Пользователи, которые лайкнули вас</h1>
 
-    {% if feed_users %}
-        {% for user in feed_users %}
+    {% if likes %}
+        {% for user in likes %}
             <div style="
                 border: 1px solid #ccc;
                 padding: 16px;
@@ -61,7 +56,7 @@
 
                 <form method="post" action="{% url 'like' user.id %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit">Лайк</button>
+                    <button type="submit">Лайк в ответ</button>
                 </form>
 
                 <form method="post" action="{% url 'dislike' user.id %}" style="display:inline;">
@@ -72,7 +67,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <p>Анкеты закончились</p>
+        <p>Пока никто не лайкнул вашу анкету</p>
     {% endif %}
 
 </main>

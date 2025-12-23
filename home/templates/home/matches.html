@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillSwap — Совпадения</title>
+</head>
+<body>
+
+<!-- ===== Верхняя панель ===== -->
+<header style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+">
+
+    <nav>
+        <a href="{% url 'home' %}" style="margin-right: 16px;">
+            Лента
+        </a>
+
+        <a href="{% url 'likes' %}">
+            Лайки
+        </a>
+    </nav>
+
+    <div>
+        <a href="#">Профиль</a>
+    </div>
+
+</header>
+
+<!-- ===== Основной контент ===== -->
+<main style="padding: 24px;">
+
+    <h1>Ваши совпадения</h1>
+
+    {% if matches %}
+        {% for user in matches %}
+            <div style="
+                border: 1px solid #ccc;
+                padding: 16px;
+                margin-bottom: 16px;
+                border-radius: 6px;
+            ">
+
+                <h3>{{ user.username }}</h3>
+
+                <p><strong>Навыки:</strong> {{ user.skill_have }}</p>
+                <p><strong>Интересы:</strong> {{ user.skill_need }}</p>
+
+                {% if user.bio %}
+                    <p>{{ user.bio }}</p>
+                {% endif %}
+
+                <hr>
+
+                <p>
+                    📬 <strong>Telegram:</strong>
+                    <a href="https://t.me/{{ user.telegram|slice:'1:' }}" target="_blank">
+                        {{ user.telegram }}
+                    </a>
+                </p>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет совпадений</p>
+    {% endif %}
+
+</main>
+
+</body>
+</html>
