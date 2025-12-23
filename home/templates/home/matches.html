@@ -26,7 +26,7 @@
     </nav>
 
     <div>
-        <a href="#">Профиль</a>
+        <a href="{% url 'view' %}">
     </div>
 
 </header>
@@ -57,7 +57,7 @@
                 <hr>
 
                 <p>
-                    📬 <strong>Telegram:</strong>
+                    <strong>Telegram:</strong>
                     <a href="https://t.me/{{ user.telegram|slice:'1:' }}" target="_blank">
                         {{ user.telegram }}
                     </a>
