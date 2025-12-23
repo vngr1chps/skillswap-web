@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .field { margin-bottom: 15px; }
+        button { margin-right: 10px; padding: 8px 15px; }
+    </style>
+</head>
+<body>
+    <h1>Мой профиль</h1>
+    
+    <div class="field">
+        <strong>Имя:</strong> {{ user.username }}
+    </div>
+    
+    <div class="field">
+        <strong>Email:</strong> {{ user.email }}
+    </div>
+    
+    <div class="field">
+        <strong>Telegram:</strong> {{ user.telegram }}
+    </div>
+    
+    <div class="field">
+        <strong>Мои навыки:</strong> {{ user.skill_have }}
+    </div>
+    
+    <div class="field">
+        <strong>Ищу навыки:</strong> {{ user.skill_need }}
+    </div>
+    
+    <div class="field">
+        <strong>О себе:</strong> {{ user.bio|linebreaks }}
+    </div>
+    
+    <br>
+    <button onclick="window.location.href='{% url 'edit' %}'">
+        Редактировать
+    </button>
+    
+    <form method="POST" action="{% url 'delete' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Удалить аккаунт?')">
+            Удалить
+        </button>
+    </form>
+</body>
+</html>
